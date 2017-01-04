@@ -3,7 +3,7 @@ db:
 web:
   build: .
   environment:
-    - DIVVY_ENV=development_docker
+    - CHAT_APP_ENV=development_docker
     - PYTHONPATH=/code/server/
     - DJANGO_SETTINGS_MODULE=settings.development_docker
   command: python server/manage.py runserver 0.0.0.0:8000
@@ -13,3 +13,10 @@ web:
     - "8000:8000"
   links:
     - db
+    - redis:redis
+redis:
+  image: redis:latest
+  ports:
+    - "6379:6379"
+  volumes:
+    - redisdata:/data

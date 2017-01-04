@@ -130,9 +130,14 @@ INSTALLED_APPS = (
     'apps.chat',
 )
 
+
+
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'asgiref.inmemory.ChannelLayer',
+        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('redis', 6379)],
+        },
         'ROUTING': 'routing.channel_routing',
     },
 }
